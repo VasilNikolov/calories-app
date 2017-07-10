@@ -1,0 +1,51 @@
+h1 {
+    color: $dark-grey;
+    @include text(h1);
+}
+h2 {
+    color: $dark-grey;
+    @include text(h2);
+}
+h3 {
+    color: $dark-grey;
+    @include text(h3);
+}
+h4 {
+    @include margin(very-small, top);
+    @include text(h4);
+}
+p {
+    color: $dark-grey;
+    @include text(p);
+}
+.red {
+    color: $white;
+    background-color: $red;
+}
+
+.green {
+    color: $white;
+    background-color: #00CC00;
+}
+input {
+    padding: 0 3px;
+}
+
+.header {
+    float: right;
+    ul {
+        border: none;
+        li {
+            border: none;
+            padding: 0;
+        }
+    }
+    a {
+        text-decoration: none;
+        color: $dark-grey;
+    }
+}
+
+.login {
+    display: block;
+}

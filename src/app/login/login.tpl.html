@@ -1,0 +1,12 @@
+`<section class="login">
+    <h3>Welcome to the calories app, please login or register to continue.</h3>
+    <form class="logform" action="#" ng-submit="submit()" novalidate>
+        <label for="logform-email">Email</label>
+        <input class="logform__email" id="logform-email" type="email" ng-required="true" ng-model="user.email">
+        <label for="logform-password">Password</label>
+        <input class="logform__password" id="logform-password" type="password" ng-required="true" ng-model="user.password">
+
+        <input class="logform__submit" type="submit" placeholder="Submit">
+    </form>
+    <a href="#!/register" class="not-registered">Not registered?</a>
+</section>`

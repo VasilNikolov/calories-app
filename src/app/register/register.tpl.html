@@ -1,0 +1,22 @@
+`<section class="register">
+    <h3>Register</h3>
+    <form class="regform" action="#" name="regForm" ng-submit="submit()" novalidate>
+        <label for="email">Email</label>
+        <input class="regform__email" id="email" type="email" ng-required="true" ng-model="newUser.email">
+
+        <label for="password">Password</label>
+        <input class="regform__password" id="password" type="password" name="password"
+               ng-required="true"
+               ng-model="newUser.password">
+
+        <label for="retype-password">Re-type password</label>
+        <input class="regform__password" id="retype-password" type="password" ng-required="true"
+               name="confirmPw"
+               ng-model="newUser.confirmPw"
+               match-password="password">
+
+        <input class="regform__submit" type="submit" placeholder="Submit">
+    </form>
+</section>`
+
+

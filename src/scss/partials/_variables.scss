@@ -1,0 +1,146 @@
+/*
+ *  Colors
+ */
+$white : #ffffff;
+$dark-grey: #343434;
+$mid-grey: #919191;
+$light-grey: #f3f3f3;
+$border-grey: rgba($mid-grey, 0.5);
+$red: #b40037;
+$blue: #93bad5;
+$gold: #e4d7b4;
+$main: #919191;
+$pink: #c70065;
+/*
+ *  Wrappers
+ */
+$container-big: 1510px;
+$container-mid: 1250px;
+$container-small: 990px;
+
+/*
+ * Base pat for inline-images
+*/
+$assetPath : "../images/";
+
+
+/*
+ *  Breakpoints
+ *  @label : ( dir: @dir, size: @size )
+ *
+ *  @label = name of breakpoint used to call mixin later on
+ *  @dir = direction of rule (min/max)
+ *  @size = screen size in pixels
+ */
+/*
+ *  $breakpoints: Base breakpoints used for fonts, margins, etc ONLY
+ *  $breakpoints1: $breakpoints + additional BPs only used in bp() mixin
+ */
+$breakpoints: (
+    xl: ( dir: min, size: 1301px ),
+    l: ( dir: max, size: 1300px ),
+    m: ( dir: max, size: 1000px ),
+    s: ( dir: max, size: 700px ),
+    xs: ( dir: max, size: 420px )
+);
+
+$breakpoints1: (
+    l: ( dir: max, size: 1300px ),
+    m: ( dir: max, size: 1000px ),
+    s: ( dir: max, size: 700px ),
+    xs: ( dir: max, size: 420px ),
+    container: ( dir: max, size: 1510px ),
+    container-mid: ( dir: max, size: 1250px ),
+    container-inner: ( dir: max, size: 991px )
+);
+
+/*
+ *  Margins
+ *  @label : ( @list )
+ *
+ *  @label = name of margin used to call mixin later on
+ *  @list = list of margin values for each breakpoint from largest to smallest
+ *  @list format: XXpx YYpx ZZpx
+ *  NOTE: The number of breakpoints has to match the number of values in @list
+ */
+$margins: (
+    very-small: 10px 10px 10px 10px 10px,
+    small: 20px 20px 20px 20px 20px,
+    medium: 30px 30px 30px 30px 20px,
+    large: 60px 50px 40px 40px 20px,
+    extra-large: 120px 100px 100px 40px 20px
+);
+/*
+ *  Fonts
+ *  @label : ( size: @size, height: @height, family: @family, weight: @weight )
+ *
+ *  @label = name of font used to call mixin later on
+ *  @size = list of font-size(s) for each breakpoint
+ *  @height = list of line-heights(s) for each breakpoint
+ *  @family = font-family
+ *  @weight = font-weight
+ *  @style = font-style (optional)
+ *  @size; @height format matches margins @list format
+ *  @family format: string 'XxxXxx YyyYyy'
+ *  @weight format: string 'normal/bold' or number 100/200/etc.
+ */
+
+
+$agency: "agency-fb",serif;
+$arial: Arial, "Helvetica Neue", Helvetica, sans-serif;
+
+$fonts: (
+    h1: (
+            size: 50px 45px 40px 35px 30px,
+            height: 60px 55px 50px 45px 40px,
+            family: $agency,
+            weight: 400,
+            style: normal
+    ),
+    h2: (
+            size: 40px 35px 30px 25px 20px,
+            height: 50px 45px 40px 33px 28px,
+            family: $agency,
+            weight: 400,
+            style: normal
+    ),
+    h3: (
+            size: 30px 30px 30px 25px 20px,
+            height: 40px 40px 40px 33px 28px,
+            family: $agency,
+            weight: 400,
+            style: normal
+    ),
+    h4: (
+            size: 20px 20px 20px 18px 16px,
+            height: 28px 28px 28px 24px 22px,
+            family: $agency,
+            weight: 400,
+            style: normal
+    ),
+    p1: (
+            size: 16px 14px 16px 15px 14px,
+            height: 24px 24px 24px 24px 22px,
+            family: $arial,
+            weight: 400,
+            style: normal
+    ),
+    p2: (
+            size: 14px 14px 14px 14px 14px,
+            height: 24px 24px 24px 24px 22px,
+            family: $arial,
+            weight: 300,
+            style: normal
+    ),
+    p3: (
+            size: 16px 16px 16px 14px 13px,
+            height: 24px 24px 24px 24px 20px,
+            family: $agency,
+            weight: 400,
+            style: normal
+    )
+);
+
+$transition-short: 0.2s;
+$transition: 0.4s;
+$transition-long: 0.8s;

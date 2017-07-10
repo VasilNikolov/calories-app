@@ -1,0 +1,9 @@
+section {
+    @include container;
+    @include margin(medium, top);
+    h3 {
+        @include padding(very-small, bottom);
+        @include margin(very-small, bottom);
+        border-bottom: 1px solid $mid-grey;
+    }
+}

@@ -1,0 +1,61 @@
+form {
+    label {
+        color: $dark-grey;
+        @include margin(medium, left);
+        &:first-child {
+            margin: 0;
+        }
+    }
+    input {
+        @include margin(very-small, left);
+        border: 1px solid $mid-grey;
+        outline: 0;
+    }
+    input[type*="submit"] {
+        height: 100%;
+        padding: 3px 0;
+        @include padding(small, left right);
+        @include margin(medium, left);
+        color: $white;
+        background-color: $dark-grey;
+        border: none;
+        transition: .2s all;
+        &:hover {
+            background-color: $red;
+        }
+    }
+}
+.filter-nav {
+    display: block;
+    @include clearfix;
+    div {
+        display: inline-block;
+        @include grid(2, 3%);
+        float: left;
+        .user-form {
+            width: 100%;
+            display: inline-block;
+            border: 1px solid $mid-grey;
+            @include padding(very-small);
+        }
+    }
+}
+
+.login {
+    .logform {
+        display: inline-block;
+    }
+    .not-registered {
+        @include margin(medium, left);
+        display: inline-block;
+        text-decoration: none;
+        color: $red;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+input.ng-invalid.ng-touched {
+    border: 1px solid red;
+}

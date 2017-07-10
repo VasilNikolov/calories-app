@@ -1,0 +1,135 @@
+.data-table {
+    @include container-inner;
+    @include margin(medium, top);
+    text-align: center;
+    &__header {
+        display: flex;
+        flex-direction: row;
+        border-top: 1px solid $light-grey;
+        border-bottom: 1px solid $light-grey;
+        li {
+            display: inline-block;
+            flex-grow: 1;
+            width: 25%;
+            @include padding(small);
+            box-sizing: border-box;
+            border-left: 1px solid $light-grey;
+            border-right: 1px solid $light-grey;
+            color: $dark-grey;
+        }
+        .controls {
+            text-align: center;
+            width: 80px;
+            padding-left: 0;
+            padding-right: 0;
+        }
+    }
+    &__body {
+        ul {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            border-top: 1px solid $light-grey;
+            border-bottom: 1px solid $light-grey;
+            li {
+                display: inline-block;
+                flex-grow: 1;
+                width: 25%;
+                @include padding(small);
+                box-sizing: border-box;
+                color: $dark-grey;
+                border-left: 1px solid $light-grey;
+                border-right: 1px solid $light-grey;
+            }
+            .edit {
+                text-align: center;
+                width: 80px;
+                padding-left: 0;
+                padding-right: 0;
+            }
+            .remove {
+                text-align: center;
+                width: 80px;
+                padding-left: 0;
+                padding-right: 0;
+                &__link {
+                    display: inline-block;
+                    color: $dark-grey;
+                    transition: .2s all;
+                    &:hover {
+                        color: $red;
+                    }
+                    @include font-awesome('f00d') {
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+ul {
+    @include container-inner;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    border-top: 1px solid $light-grey;
+    border-bottom: 1px solid $light-grey;
+    li {
+        display: inline-block;
+        flex-grow: 1;
+        width: 25%;
+        @include padding(small);
+        box-sizing: border-box;
+        color: $dark-grey;
+        border-left: 1px solid $light-grey;
+        border-right: 1px solid $light-grey;
+    }
+    .edit {
+        text-align: center;
+        width: 80px;
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .remove {
+        text-align: center;
+        width: 80px;
+        padding-left: 0;
+        padding-right: 0;
+        &__link {
+            display: inline-block;
+            color: $dark-grey;
+            transition: .2s all;
+            &:hover {
+                color: $red;
+            }
+            @include font-awesome('f00d') {
+                font-size: 20px;
+            }
+        }
+    }
+}
+
+.admin-headers {
+    @include container-inner;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    @include padding(very-small, bottom);
+    @include margin(very-small, bottom);
+    border-bottom: 1px solid $mid-grey;
+    h3 {
+        border: none;
+        padding: 0;
+        margin: 0;
+    }
+    a.admin-remove {
+        color: $red;
+        text-decoration: none;
+        justify-content: flex-end;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}

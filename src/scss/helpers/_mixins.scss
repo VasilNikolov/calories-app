@@ -1,0 +1,315 @@
+// Double Border Mixin
+//
+// @param {size} $size1 - Size of inner border
+// @param {size} $size2 - Size of outer border
+// @param {colour} $color1 - Colour of inner border
+// @param {colour} $color2 - Colour of outer border
+// @param {specifier} $type1 [solid] - Type of inner border
+// @param {specifier} $type2 [solid] - Type of outer border
+//
+@mixin double-border($size1, $size2, $color1, $color2, $type1: solid, $type2: solid) {
+    border: $size1 $color1 $type1;
+    outline: $size2 $color2 $type2;
+}
+
+// Pseudo-element Surrounder Mixin
+// Adds :before and :after of element with specific content
+//
+// @param {*} $content - The specific content to be added
+// ***Most suitable options: - ; >> ; << ; # ***
+//
+// @param {specifier} $position - Where to add the content
+// ***Positions: both; left; right***
+//
+// @content - allows for additional content added to the mixin when including for extra styling
+//
+@mixin surrounder($content, $position: 'both') {
+    @if $position == 'both' {
+        &:before {
+            content: '#{$content} ';
+            @content;
+        }
+        &:after {
+            content: ' #{$content}';
+            @content;
+        }
+    } @else if $position == 'left' {
+        &:before {
+            content: '#{$content} ';
+            @content;
+        }
+    } @else if $position == 'right' {
+        &:after {
+            content: ' #{$content}';
+            @content;
+        }
+    }
+}
+
+@mixin container {
+    max-width: $container-big;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+@mixin container-inner {
+    max-width: $container-small;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@mixin button-hover($color1, $color2) {
+    &:hover {
+        background-color: $color1;
+        color: $color2;
+        border: 1px $color1 solid;
+        transition: 0.2s all;
+    }
+}
+@mixin full-width($color) {
+    &:before {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        right: calc(100% - 1px);
+        display: inline-block;
+        height: 100%;
+        max-width: 490px;
+        width: 100%;
+        background-color: $color;
+    }
+
+    &:after {
+        content: "";
+        z-index: -1;
+        position: absolute;
+        overflow: hidden;
+        top: 0;
+        left: calc(100% - 1px);
+        display: inline-block;
+        height: 100%;
+        max-width: 490px;
+        width: 100%;
+        background-color: $color;
+    }
+}
+
+/*
+ *  Mixin list:
+ *  * bp(xs) {...};
+ *  * margin(huge, top bottom left);
+ *  * padding(huge, top bottom left);
+ *  * text(p2);
+ *  * center; center(x);
+ *  * clearfix;
+ *  * fontawesome;
+ *  * text-bg($orange, 10px);
+ *  * grid(4, 2%);
+ */
+/*
+ *  Breakpoints generator mixin
+ *  Usage: bp($width) {@content;};
+ *  Example: bp(xs) {...};
+ *  Params: $width - corresponds to label of desired breakpoint from breakpoints var list
+ *          @content - block with code to be included in the breakpoint
+ *  Requires: $breakpoints variables
+ */
+@mixin bp($width) {
+    @if map_has_key($breakpoints1, $width) {
+        $size: map_get(map_get($breakpoints1, $width), size);
+        $type: map_get(map_get($breakpoints1, $width), dir);
+        @media only screen and (#{$type}-width: $size) {
+            @content;
+        }
+    } @else {
+        background-color: red;
+    }
+}
+/*
+ *  Margin generator mixin
+ *  Usage: margin($size, $sides);
+ *  Example: margin(huge, top bottom left);
+ *  Params: $size - corresponds to label of desired margin from margin var list
+ *          $sides - single value or list with desired sides to apply margin to
+ *  Requires: $margin and $breakpoints variables
+ */
+@mixin margin($size, $sides: null) {
+    @if map_has_key($margins, $size) {
+        $margin: map_get($margins, $size);
+        @for $z from 1 through length($margin) {
+            $marg: nth($margin, $z);
+            $dir: map_get(nth(nth($breakpoints, $z), 2), dir);
+            $size: map_get(nth(nth($breakpoints, $z), 2), size);
+            @media screen and (#{$dir}-width: $size) {
+                @if $sides == null {
+                    margin: nth($margin, $z);
+                } @else {
+                    @each $side in $sides {
+                        margin-#{$side}:nth($margin, $z);
+                    }
+                }
+            }
+        }
+    } @else {
+        background-color: red;
+    }
+}
+/*
+ *  Padding generator mixin
+ *  Used to fake margins when margin is not possible
+ *  Usage: padding($size, $sides);
+ *  Example: padding(huge, top bottom left);
+ *  Params: $size - corresponds to label of desired margin from margin var list
+ *          $sides - single value or list with desired sides to apply padding to
+ *  Requires: $margin and $breakpoints variables
+ */
+@mixin padding($size, $sides: null) {
+    @if map_has_key($margins, $size) {
+        $margin: map_get($margins, $size);
+        @for $z from 1 through length($margin) {
+            $marg: nth($margin, $z);
+            $dir: map_get(nth(nth($breakpoints, $z), 2), dir);
+            $size: map_get(nth(nth($breakpoints, $z), 2), size);
+            @media screen and (#{$dir}-width: $size) {
+                @if $sides == null {
+                    padding: nth($margin, $z);
+                } @else {
+                    @each $side in $sides {
+                        padding-#{$side}:nth($margin, $z);
+                    }
+                }
+            }
+        }
+    } @else {
+        background-color: red;
+    }
+}
+/*
+ *  Text styles mixin
+ *  Usage: text($type);
+ *  Example: text(p2);
+ *  Params: $type - corresponds to label of desired text from fonts var list
+ *  Requires: $fonts and $breakpoints variables
+ */
+@mixin text($type) {
+    @if map_has_key($fonts, $type) {
+        $text: map_get($fonts, $type);
+        $f-size: map_get($text, size);
+        $l-height: map_get($text, height);
+        $f-family: map_get($text, family);
+        $f-weight: map_get($text, weight);
+        $f-style: map_get($text, style);
+        @each $break in $breakpoints {
+            $i: index($breakpoints, $break);
+            $dir: map_get(nth(nth($breakpoints,$i),2), dir);
+            $size: map_get(nth(nth($breakpoints,$i),2), size);
+            @media screen and (#{$dir}-width: $size) {
+                font-size: nth($f-size, $i);
+                line-height: nth($l-height, $i);
+            }
+        }
+        font-family: $f-family;
+        font-weight: $f-weight;
+        font-style: $f-style;
+    } @else {
+        background-color: red;
+    }
+}
+/*
+ *  Centering of element mixin
+ *  Used to center vertically/horizontally or both
+ *  Usage: center($axis);
+ *  Example: center; center(x);
+ *  Params: $axis - axis of centering, x for x-axis, y for y-axis, null for x-axis and y-axis
+ *  Requires: nothing
+ */
+@mixin center($axis: null) {
+    position: absolute;
+    @if $axis == null {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    } @elseif $axis == x {
+        left: 50%;
+        transform: translateX(-50%);
+    } @elseif $axis == y {
+        top: 50%;
+        transform: translateY(-50%);
+    }
+}
+/*
+ *  font-awesome mixin
+ *  Usage: font-awesome($unicode, $pseudo) {@content;};
+ *  Example: font-awesome(f06a, before) {...};
+ *  Params: $unicode - defines the font awesome icon
+ *          $pseudo - defines after or before pseudo classes
+ *  Requires: font awesome implemented
+ */
+@function unicode($str) {
+    @return unquote("\"")+unquote(str-insert($str, "\\", 1))+unquote("\"");
+}
+
+@mixin font-awesome($unicode: 'f101', $pseudo: before) {
+    &:#{$pseudo} {
+        font-family: "FontAwesome", "sans-serif";
+        content: unicode($unicode);
+        display: inline-block;
+        text-rendering: auto;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        @content;
+    }
+}
+/*
+ *  Clearfix mixin
+ *  Used to clearfix parent of floated elements
+ *  Usage: clearfix;
+ *  Example: clearfix;
+ *  Params: none;
+ *  Requires: nothing;
+ */
+@mixin clearfix {
+    &:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+}
+/*
+ *  Inline text background mixin
+ *  Used to add special padding for inline texts
+ *  Usage: text-bg($color);
+ *  Example: text-bg($orange);
+ *  Params: $color - color of background
+ *  Requires: none
+ */
+@mixin text-bg($color, $size) {
+    background-color: $color;
+    box-shadow: #{$size} 0 0 $color, -#{$size} 0 0 $color;
+}
+/*
+ *  Grid generator mixin
+ *  Usage: grid($numPerRow, $margin);
+ *  Example: grid(4, 2%);
+ *  Params: $numPerRow - number of boxes per row
+ *          $margin - margin between boxes in %
+ *  Requires: none
+ */
+@mixin grid($numPerRow, $margin) {
+    width: ((100% - (($numPerRow - 1) * $margin)) / $numPerRow);
+    &:nth-child(n) {
+        margin-bottom: $margin;
+        margin-right: $margin;
+    }
+    &:nth-child(#{$numPerRow}n) {
+        margin-right: 0;
+    }
+    @if $numPerRow == 1 {
+        &:nth-child(#{$numPerRow}n) {
+            margin-bottom: $margin;
+        }
+    }
+}
