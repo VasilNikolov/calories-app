@@ -1,1 +1,1 @@
-Calorise app
+An angular app for tracking your calories
