@@ -1,6 +1,6 @@
 `<section class="login">
     <h3>Welcome to the calories app, please login or register to continue.</h3>
-    <form class="logform" action="#" ng-submit="submit()" novalidate>
+    <form class="logform" action="#" ng-submit="submit($event)" novalidate>
         <label for="logform-email">Email</label>
         <input class="logform__email" id="logform-email" type="email" ng-required="true" ng-model="user.email">
         <label for="logform-password">Password</label>
