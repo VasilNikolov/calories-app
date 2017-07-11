@@ -1,0 +1,87 @@
+`<section class="logged-in">
+    <nav class="header">
+        <ul>
+            <li>
+                <a href="/" id="user-logout"
+                   ng-click="logout()">Logout
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <h3>Meals</h3>
+    <nav class="filter-nav">
+        <div>
+            <h4>Filter Date</h4>
+            <form class="user-form" action="#" id="filter-date">
+                <label for="filter-date__from">From:</label>
+                <input id="filter-date__from" type="text">
+
+                <label for="filter-date__to">To:</label>
+                <input id="filter-date__to" type="text">
+
+                <input type="submit">
+            </form>
+        </div>
+        <div>
+            <h4>Filter Time</h4>
+            <form class="user-form" action="#" id="filter-time">
+                <label for="filter-time__from">From:</label>
+                <input id="filter-time__from" type="text">
+
+                <label for="filter-time__to">To:</label>
+                <input id="filter-time__to" type="text">
+
+                <input type="submit">
+            </form>
+        </div>
+        <div>
+            <h4>Your target</h4>
+            <form action="#" class="user-form" id="target">
+                <label for="target__calories">Target calories for period:</label>
+                <input type="text" id="target__calories">
+
+                <input type="submit">
+            </form>
+        </div>
+        <div>
+            <h4>Add a meal</h4>
+            <form action="#" class="user-form" id="add-meal">
+                <label for="add-meal__description">Description</label>
+                <input type="text" id="add-meal__description">
+
+                <label for="add-meal__calories">Calories</label>
+                <input type="text" id="add-meal__calories">
+
+                <input type="submit">
+            </form>
+        </div>
+        <div>
+            <h4>Edit meal</h4>
+            <form action="#" class="user-form" id="edit-meal">
+                <label for="edit-meal__description">Description</label>
+                <input type="text" id="edit-meal__description">
+
+                <label for="edit-meal__calories">Calories</label>
+                <input type="text" id="edit-meal__calories">
+
+                <input type="submit">
+            </form>
+        </div>
+    </nav>
+
+    <div class="data-table">
+        <ul class="data-table__header">
+            <li>Date</li>
+            <li>Time</li>
+            <li>Description</li>
+            <li>Calories</li>
+            <li class="controls">Edit</li>
+            <li class="controls">Remove</li>
+        </ul>
+        <div class="data-table__body">
+        </div>
+    </div>
+    <div class="admin-table">
+
+    </div>
+</section>`
