@@ -2,7 +2,7 @@
     <nav class="header">
         <ul>
             <li>
-                <a href="/" id="user-logout"
+                <a href="#" id="user-logout"
                    ng-click="logout()">Logout
                 </a>
             </li>
@@ -45,12 +45,15 @@
         </div>
         <div>
             <h4>Add a meal</h4>
-            <form action="#" class="user-form" id="add-meal">
+            <form action="#" class="user-form" id="add-meal"
+                ng-submit="newMeal($event)">
                 <label for="add-meal__description">Description</label>
-                <input type="text" id="add-meal__description">
+                <input type="text" id="add-meal__description"
+                       ng-model="vm.meal.description">
 
                 <label for="add-meal__calories">Calories</label>
-                <input type="text" id="add-meal__calories">
+                <input type="text" id="add-meal__calories"
+                       ng-model="vm.meal.calories">
 
                 <input type="submit">
             </form>
@@ -78,10 +81,9 @@
             <li class="controls">Edit</li>
             <li class="controls">Remove</li>
         </ul>
-        <div class="data-table__body">
-        </div>
-    </div>
-    <div class="admin-table">
 
+        <div class="data-table__body">
+            <meals></meals>
+        </div>
     </div>
 </section>`

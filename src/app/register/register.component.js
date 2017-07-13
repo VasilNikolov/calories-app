@@ -8,7 +8,7 @@ export let registerComponent = {
 		newUser: '='
 	},
 	controller: class registerComponent {
-		constructor ($scope) {
+		constructor ($scope, mealsModel) {
 			$scope.submit = (event) => {
 				event.preventDefault();
 				let newUser = $scope.newUser,

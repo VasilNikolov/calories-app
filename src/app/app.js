@@ -1,77 +1,59 @@
+/**
+ * Import our files
+ */
 import angular from 'angular';
 import ngRoute from 'angular-route';
 import ngPassword from 'angular-password';
+import {userAccess} from './user-state/user-state';
 import {loginComponent} from './login/login.component';
 import {registerComponent} from './register/register.component';
 import {loggedInComponent} from './logged-in/logged-in.component';
+import {mealHandler} from './meal-handler/meal-handler.directive';
+import {dataHandler} from './services/data-handler/data-handler.service';
 
-
+/**
+ * Start our angular module named 'app'
+ * Dependencies are:
+ *  - ngRoute
+ *  - ngPassword
+ */
 export default angular.module('app', ['ngRoute', 'ngPassword'])
 	.config(config)
+	.run(userAccess)
+	.service('dataHandler', dataHandler)
 	.component(loginComponent.selector, loginComponent)
 	.component(registerComponent.selector, registerComponent)
-	.component(loggedInComponent.selector, loggedInComponent).run( function($location, $window, $rootScope) {
-		firebase.auth().onAuthStateChanged(function (user) {
-			if (user !== null) {
-				//User is logged in
-				let uid = user.uid;
-				firebase.database().ref('/users/' + uid).once('value').then(function (snapshot) {
-					let obj = snapshot.val();
-					try {
-						let access = obj.access;
-						switch (access) {
-							case 'admin':
-								console.log('admin');
-								break;
-							case 'manager':
-								alert('You are a manager!');
-								break;
-							default:
-								$rootScope.$apply(function () {
-									$location.path("/logged-in");
-								});
-								break;
-						}
-					} catch (e) {
-						console.log(e);
-					}
-				});
-			} else {
-				//listener to watch route changes
-				$rootScope.$on("$routeChangeStart", function (event, next, current) {
-					if (firebase.auth().currentUser === null) {
-						// no logged user, we should be going to #login
-						if (next.templateUrl === "/src/app/login/login.tpl.html" || next.templateUrl === "/src/app/register/register.tpl.html") {
-							// already going to login, no redirect needed
-						} else {
-							// not going to login, we should redirect now
-							$location.path("/login");
-						}
-					}
-				});
-			}
+	.component(loggedInComponent.selector, loggedInComponent)
+	.directive('meals', mealHandler);
 
+
+/**
+ * The configuration of our app, handles the routing
+ * @param $routeProvider - The route provider from ngRoute
+ * @param $logProvider - The log provider angular object
+ */
+function config($routeProvider, $logProvider) {
+	$logProvider.debugEnabled(true);
+	$routeProvider
+		.when('/', {
+			templateUrl: '/src/app/login/login.tpl.html',
+			controller: loginComponent.controller,
+			controllerAs: 'vm',
+			reloadOnSearch: false
+		})
+		.when('/register', {
+			templateUrl: '/src/app/register/register.tpl.html',
+			controller: registerComponent.controller,
+			controllerAs: 'vm',
+			reloadOnSearch: false
+		})
+		.when('/logged-in', {
+			templateUrl: '/src/app/logged-in/logged-in.tpl.html',
+			controller: loggedInComponent.controller,
+			controllerAs: 'vm',
+			reloadOnSearch: false
+		})
+		.otherwise({
+			redirectTo: '/'
 		});
-
-	});
-
-function config($routeProvider) {
-	$routeProvider.when('/', {
-		templateUrl: '/src/app/login/login.tpl.html',
-		controller: loginComponent.controller,
-		controllerAs: 'vm',
-		reloadOnSearch: false
-	}).when('/register', {
-		templateUrl: '/src/app/register/register.tpl.html',
-		controller: registerComponent.controller,
-		controllerAs: 'vm',
-		reloadOnSearch: false
-	}).when('/logged-in', {
-		templateUrl: '/src/app/logged-in/logged-in.tpl.html',
-		controller: loggedInComponent.controller,
-		controllerAs: 'vm',
-		reloadOnSearch: false
-	}).otherwise({
-		redirectTo: '/'
-	});
 }

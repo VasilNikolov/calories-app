@@ -4,14 +4,26 @@ export let loggedInComponent = {
 	selector: 'loggedInComponent',
 	controllerAs: 'loggedInComponent',
 	template,
-	bindings: {
-		newUser: '='
-	},
 	controller: class loggedInComponent {
-		constructor($scope) {
+		constructor($scope, dataHandler) {
+			let vm = this,
+				user = firebase.auth().currentUser;
+
+			if (user) {
+				// User is signed in.
+			} else {
+				// No user is signed in.
+
+			}
+
 			$scope.logout = () => {
 				this.signOut();
 			};
+			$scope.newMeal = (e) => {
+				e.preventDefault();
+				console.log('vliza');
+				dataHandler.newMeal(vm.meal.description, vm.meal.calories);
+			}
 
 		}
 
@@ -22,6 +34,7 @@ export let loggedInComponent = {
 				// An error happened.
 				console.log(error);
 			});
-		}
+		};
+
 	}
 };

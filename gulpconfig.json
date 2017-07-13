@@ -13,7 +13,7 @@
       }
     },
   "javascript": {
-    "files": ["./src/app/*.js", "./src/app/*/*.js", "./src/app/src/*/*.js"],
+    "files": ["./src/app/*.js", "./src/app/*/*.js", "./src/app/src/*/*/*.js", "./src/app/src/*/*/*/*.js"],
     "source": "./src/app/",
     "dest": "./assets/scripts/",
     "title": "app.js"
