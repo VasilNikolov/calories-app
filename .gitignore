@@ -7,3 +7,6 @@ node_modules/
 # Ignore compiled assets
 /assets/css/
 /assets/scripts/
+
+# Ignore logs
+npm-debug.log
