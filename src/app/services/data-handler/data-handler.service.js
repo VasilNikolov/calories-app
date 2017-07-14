@@ -71,7 +71,7 @@ export function dataHandler() {
 	/**
 	 * Processes and orders the raw data from firebase.
 	 * @param snapshot - Firebase promise containing meals
-	 * @returns {Array}
+	 * @returns {Array} - Ordered array of processed meal objects
 	 */
 	this.processMeals = (snapshot) => {
 		let obj = snapshot.val();
@@ -91,9 +91,9 @@ export function dataHandler() {
 	};
 
 	/**
-	 * Retrieves and orders all the meals of a given user and stores them.
+	 * Handles read operations from firebase
 	 * @param {string} dir - The directory we want to access
-	 * @param {string} type - If 'm', processes the melas, if unset, returns the promise.
+	 * @param {string} type - If 'p', returns the promise, if unset, processes the meals.
 	 * @returns promise - The promise from firebase
 	 */
 	this.readData = (type = 'm', dir) => {
