@@ -2,8 +2,7 @@
  * Service for handling our requests to firebase
  */
 export function dataHandler() {
-	let data = null,
-		self = this;
+	let data = null;
 
 	/**
 	 * Sets the data
@@ -86,7 +85,7 @@ export function dataHandler() {
 			};
 			arr.push(myObj);
 		}
-		self.set(arr);
+		this.set(arr);
 		return arr;
 	};
 
@@ -101,8 +100,8 @@ export function dataHandler() {
 		if (user) {
 			if (type === 'm') {
 				return firebase.database().ref('/meals/' + user.uid).once('value')
-					.then(function (snapshot) {
-						return self.processMeals(snapshot);
+					.then((snapshot) => {
+						return this.processMeals(snapshot);
 					});
 			} else if (type === 'p') {
 				return firebase.database().ref(dir + user.uid).once('value')

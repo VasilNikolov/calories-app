@@ -34,7 +34,7 @@
   "dependencies": {
     "angular": "^1.6.4",
     "angular-password": "^1.0.3",
-    "angular-route": "^1.6.5",
+    "angular-ui-router": "^1.0.3",
     "gulp": "^3.9.1"
   }
 }

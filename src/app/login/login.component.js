@@ -13,14 +13,13 @@ export let loginComponent = {
 		user: '='
 	},
 	controller: class loginController {
-		constructor ($scope) {
-
+		constructor ($scope, emailRegEx) {
+			let vm = this;
 			// Submit method for the login form
 			$scope.submit = (event) => {
 				event.preventDefault();
-				let user = $scope.user,
-					re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-				if (re.test(user.email)) {
+				let user = vm.user;
+				if (emailRegEx.test(user.email)) {
 					this.loginUser(user);
 				} else {
 					alert('Email is not valid');

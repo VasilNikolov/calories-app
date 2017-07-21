@@ -1,6 +1,6 @@
 import {template} from './register.tpl.html';
 
-export let registerComponent = {
+export const registerComponent = {
 	selector: 'registerComponent',
 	controllerAs: 'registerComponent',
 	template,
@@ -8,16 +8,15 @@ export let registerComponent = {
 		newUser: '='
 	},
 	controller: class registerComponent {
-		constructor ($scope, mealsModel) {
+		constructor ($scope, emailRegEx) {
 			$scope.submit = (event) => {
 				event.preventDefault();
-				let newUser = $scope.newUser,
-					re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+				let newUser = $scope.newUser;
 				if (newUser.password !== newUser.confirmPw) {
 					alert("Passwords don't match");
 					return;
 				} else {
-					if (re.test(newUser.email)) {
+					if (emailRegEx.test(newUser.email)) {
 						this.createUser(newUser);
 					} else {
 						alert("Email is not valid");

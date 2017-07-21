@@ -1,6 +1,4 @@
-
-
-export function userAccess ($location, $window, $rootScope) {
+export function userAccess ($location, $state, $rootScope) {
 
 	/**
 	 * Function for handling access
@@ -40,7 +38,7 @@ export function userAccess ($location, $window, $rootScope) {
 						// already going to login, no redirect needed
 					} else {
 						// not going to login, we should redirect now
-						$location.path("/login");
+						$state.go("login");
 					}
 				}
 			});
